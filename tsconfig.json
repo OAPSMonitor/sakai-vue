@@ -1,21 +1,14 @@
 {
-    "compilerOptions": {
-      "target": "esnext",
-      "module": "esnext",
-      "moduleResolution": "node",
-      "strict": true,
-      "jsx": "preserve",
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true,
-      "baseUrl": ".",
-      "paths": {
-        "@/*": ["src/*"]
-      },
-      "allowJs": true, // Permet d'inclure les fichiers JavaScript
-    "checkJs": true,  // Active la vérification des fichiers JavaScript
-    "outDir": "./dist" 
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
     },
-    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.js"  ],
-    "exclude": ["node_modules", "dist"]
-  }
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ]
+}
