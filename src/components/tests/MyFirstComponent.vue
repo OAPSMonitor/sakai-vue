@@ -16,7 +16,7 @@ const toast = useToast();
 
 const updateMessage = () => {
     message.value = 'Hello, Vue 3 with TypeScript!';
-    toast.add({ severity: 'success', summary: 'Message Updated', detail: 'The message has been updated successfully.' });
+    toast.add({ severity: 'success', summary: 'Message Updated', detail: 'The message has been updated successfully.', life: 3000 });
 };
 </script>
 

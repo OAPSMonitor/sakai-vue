@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { render, type RenderOptions, type RenderResult } from '@testing-library/vue';
 import type { Component } from 'vue';
 import * as matchers from '@testing-library/jest-dom/matchers';
-import { expect as vitestExpect, it } from 'vitest';
+import { expect as vitestExpect, it, describe, vi , beforeEach } from 'vitest';
 import { screen } from '@testing-library/vue';
 
 // Importer le module PrimeVue
@@ -10,13 +10,14 @@ import { screen } from '@testing-library/vue';
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 import Toast from 'primevue/toast';
+import toasteventbus from 'primevue/toasteventbus'
 
 // Étendre expect avec les matchers de @testing-library/jest-dom
 vitestExpect.extend(matchers);
 
 // Exporter expect étendu et it de vitest
 export const expect = vitestExpect;
-export { it, screen };
+export { it, screen, describe, beforeEach };
 
 // Définir le type de retour pour la fonction setup
 type SetupReturn = RenderResult & { user: ReturnType<typeof userEvent.setup> };
@@ -38,3 +39,6 @@ export const setup = (component: Component, { renderOptions }: { renderOptions?:
         user
     };
 };
+
+export const toastAddSpy = vi.fn(); // Export `toastAddSpy` to be used in tests
+export const toastEmitSpy = vi.spyOn(toasteventbus, 'emit')

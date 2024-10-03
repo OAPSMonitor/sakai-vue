@@ -1,13 +1,9 @@
-import { setup, it, expect, screen } from '@/tests/utils';
-
-import { describe } from 'vitest';
-
-// import { mount } from '@vue/test-utils';
-// import { describe, it, expect } from 'vitest';
+import { setup, it, expect, screen, describe, toastAddSpy } from '@/tests/utils';
 import MyFirstComponent from '@/components/tests/MyFirstComponent.vue';
 
 describe('HelloWorld', () => {
     it('renders properly', async () => {
+        toastAddSpy.mockClear();
         const { user } = setup(MyFirstComponent);
 
         // const wrapper = mount(MyFirstComponent);
@@ -20,8 +16,14 @@ describe('HelloWorld', () => {
         const button = await screen.findByRole('button');
         await user.click(button);
         screen.debug();
-        expect(await screen.findByText('Hello, Vue 3 with TypeScript!')).toBeVisible();
-        const toast = await screen.findByText('Message Updated');
-        expect(toast).toBeVisible();
+
+        expect(toastAddSpy).toHaveBeenCalledTimes(1);
+        expect(toastAddSpy).toHaveBeenCalledWith(
+            expect.objectContaining({
+                severity: 'success',
+                summary: 'Message Updated',
+                detail: 'The message has been updated successfully.'
+            })
+        );
     });
 });
